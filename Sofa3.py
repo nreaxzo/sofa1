@@ -1,11 +1,24 @@
-import pandas as pd
+import math
 
-df = pd.read_csv('bike.csv', index_col=0) 
+a = float(input("Enter value for a: "))
+b = float(input("Enter value for b: "))
+h = float(input("Enter step h: "))
 
-average_sales = df.mean(axis=0)
+def f(x):
+    return 7 - x * math.exp(2 * x - 1) + math.sqrt(abs(x))
 
-average_df = pd.DataFrame(average_sales, columns=['Average Sales'])
+values = []
+x = a
+while x <= b:
+    fx = f(x)
+    values.append(fx)
+    x += h
 
-average_df.to_csv('average.csv')
+print("\nList of function values (row):")
+print(values)
 
-print("Average sales have been calculated and saved to 'average.csv'.")
+duplicates = set([value for value in values if values.count(value) > 1])
+print("\nDuplicate function values:")
+for duplicate in duplicates:
+    print(duplicate)
+
